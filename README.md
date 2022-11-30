@@ -1,5 +1,6 @@
 # Quiz
-
+## About
+This app was created for programming classes. 
 ## Updates
 
 ### 1.1 
