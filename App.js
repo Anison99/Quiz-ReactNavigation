@@ -1,9 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
-import { Button, StyleSheet } from 'react-native';
-
-import homeLogo from './assets/home.png'
+import { Button } from 'react-native';
 
 import Home from './components/Home';
 import TestOne from './components/TestOne';
@@ -25,8 +23,8 @@ const App = () => {
                         headerLeft: () => (
                             <Button
                                 onPress={() => alert('This is a button!')}
-                                title="MORE"
-                                color="#000000"  
+                                title="<"
+                                color="#000000"   
                             />
                         ),
                     }}
@@ -48,7 +46,6 @@ const App = () => {
                     component={Results}
                 />
             </Stack.Navigator>
-
         </NavigationContainer>
     );
 }
