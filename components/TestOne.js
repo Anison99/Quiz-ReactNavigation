@@ -3,8 +3,10 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 
 
+
 export default function TestOne() {
     const [counter, setCounter] = React.useState(10);
+    const [count, setCount] = useState(0);
 
     React.useEffect(() => {
         counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
@@ -14,13 +16,10 @@ export default function TestOne() {
     return (
         <View style={styles.cardContainer}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }} >
-                <Text style={styles.header}>Question</Text>
-                <Text style={styles.header}>Time {counter } </Text>
-                
+                <Text style={styles.header}>Question {count} of 10</Text>
+                <Text style={styles.header}>Time {counter } </Text>   
             </View>
-            <View>
-                
-            </View>
+            
 
             <View>
                 <Text style={styles.question} >This is example of test question. Do you know answer?</Text>
@@ -35,7 +34,10 @@ export default function TestOne() {
             </View>
 
             <View style={styles.buttonContainer}>
-                <Button style={styles.buttonStyle, { fontSize: 40 }} title={"NEXT"} />
+                <Button style={styles.buttonStyle, { fontSize: 40 }} onPress={() => { setCount(count + 1) }} title="NEXT" />
+                {/*  
+                 *  <Button onPress={() => { setCount(0) }} title="Reset"/>
+                 */ }
             </View>
         </View>
         
