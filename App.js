@@ -1,20 +1,57 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import * as React from 'react';
+import { Button } from 'react-native';
+
+
+import Home from './components/Home';
+import TestOne from './components/TestOne';
+import TestTwo from './components/TestTwo';
+import TestThree from './components/TestThree';
+import Results from './components/Results';
+
+
+const Stack = createStackNavigator(); // zainicjowanie górnnego paska nawigacji
+
+const App = () => {
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+                <Stack.Screen // top banner + drawer button
+                    name="Home"
+                    component={Home}
+                    options={{
+                        headerLeft: () => (
+                            <Button
+                                onPress={() => alert('This is a button!')}
+                                title="<"
+                                color="#000000"   
+                            />
+                        ),
+                    }}
+                />
+                <Stack.Screen
+                    name="Test #1"
+                    component={TestOne}
+                />
+                <Stack.Screen
+                    name="Test #2"
+                    component={TestTwo}
+                />
+                <Stack.Screen
+                    name="Test #3"
+                    component={TestThree}
+                />
+                <Stack.Screen
+                    name="Results"
+                    component={Results}
+                />
+                
+                
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
