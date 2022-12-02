@@ -23,20 +23,22 @@ export default function Home({ navigation }) {
             </View>
 
 
-            <View style={styles.container}>
-                <Button color='#fff' title={"Test #1 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #1")} />
-            </View>
+            <View >
+                <View style={styles.spaceButtons}>
+                    <Button style={styles.container}  color='#608CCF' title={"Test #1 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #1")} />
+                </View>
 
-            <View style={styles.container}>
-                <Button color='#fff' title={"Test #2 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #2")} />
-            </View>
+                <View style={styles.spaceButtons}>
+                    <Button style={styles.container} color='#608CCF' title={"Test #2 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #2")} />    
+                </View>
 
-            <View style={styles.container}>
-                <Button color='#fff' title={"Test #3 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #3")} />
-            </View>
+                <View style={styles.spaceButtons}>
+                    <Button style={styles.container} color='#608CCF' title={"Test #3 \n \n lorem ipsum \n Press to take a test"} onPress={() => navigation.navigate("Test #3")} />
+                </View>
 
-            <View style={styles.resultPage}>
-                <Button color='#fff' title={"GET TO KNOW YOUR RESULTS!"} onPress={() => navigation.navigate("Results")}> </Button>
+                <View style={styles.spaceButtons}>
+                    <Button style={styles.resultPage} color='#3362AB' title={"GET TO KNOW YOUR RESULTS!"} onPress={() => navigation.navigate("Results")}> </Button>
+                </View>
             </View>
             
 
@@ -63,6 +65,10 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 25,
     },
+
+    spaceButtons: {
+        marginVertical: 10
+    }
 
 });
 

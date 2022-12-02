@@ -23,17 +23,16 @@ export default function TestTwo() {
             <View>
                 <Text style={styles.question} >This is example of test question. Do you know answer?</Text>
             </View>
-
-            <View style={styles.buttonContainer}>
-                <Button style={styles.buttonStyle} title={"A. Answer 1"} />
-                <Button style={styles.buttonStyle} title={"B. Answer 2"} />
-                <Button style={styles.buttonStyle} title={"C. Answer 3"} />
-                <Button style={styles.buttonStyle} title={"D. Answer 4"} />
+            <View style={styles.buttonStyle}>
+                <Button color='#608CCF' style={styles.buttonStyle} title={"A. Answer 1"} />
+                <Button color='#608CCF' style={styles.buttonStyle} title={"B. Answer 2"} />
+                <Button color='#608CCF' style={styles.buttonStyle} title={"C. Answer 3"} />
+                <Button color='#608CCF' style={styles.buttonStyle} title={"D. Answer 4"} />
 
             </View>
 
             <View style={styles.buttonContainer}>
-                <Button style={styles.buttonStyle, { fontSize: 40 }} onPress={() => { setCount(count + 1) }} title="NEXT" />
+                <Button color='#3362AB' onPress={() => { setCount(count + 1) }} title="NEXT" />
                 {/*  
                  *  <Button onPress={() => { setCount(0) }} title="Reset"/>
                  */ }
@@ -69,6 +68,7 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         flex: 1,
+        marginVertical: 100
 
     },
 
