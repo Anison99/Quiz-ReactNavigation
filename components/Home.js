@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { View, Text, ScrollView, Animated, StyleSheet, Button } from 'react-native';
 
 import useAnimatedHeaderTitle from './useAnimatedTitle';
+
+
 
 
 export default function Home({ navigation }) {
@@ -15,6 +17,8 @@ export default function Home({ navigation }) {
         { useNativeDriver: false }
     )
     // -------
+    
+
     return (
         <ScrollView onScroll={handleScroll} scrollEventThrottle={16}>
 

@@ -1,7 +1,8 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from 'react-native';
 
 
@@ -10,14 +11,34 @@ import TestOne from './components/TestOne';
 import TestTwo from './components/TestTwo';
 import TestThree from './components/TestThree';
 import Results from './components/Results';
+import HelloScreen from './mechanics/HelloScreen';
+import Rules from './components/Rules';
 
+const HAS_LAUNCHED = 'HAS_LAUNCHED';
 
 const Stack = createStackNavigator(); // zainicjowanie górnnego paska nawigacji
+ 
 
 const App = () => {
-    return (
+    const [hasLaunched, setHasLaunched] = useState(false);
+
+    useEffect(() => {
+        const getData = async () => {
+            const hasLaunched = await getItemFor(HAS_LAUNCHED);
+            if (hasLaunched) {
+                setHasLaunched(true);
+            }
+            else {
+                await storeData(HAS_LAUNCHED, "true");
+            }
+        };
+
+        getData().catch((error) => { console.log(error) })
+    }, [])
+    if (hasLaunched) return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
+                
                 <Stack.Screen // top banner + drawer button
                     name="Home"
                     component={Home}
@@ -52,6 +73,7 @@ const App = () => {
             </Stack.Navigator>
         </NavigationContainer>
     );
+    if (!hasLaunched) return <Rules />
 }
 
 export default App;
