@@ -35,9 +35,9 @@ const App = () => {
 
         getData().catch((error) => { console.log(error) })
     }, [])
-    if (hasLaunched) return (
+   return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+            <Stack.Navigator initialRouteName="Rules">
                 
                 <Stack.Screen // top banner + drawer button
                     name="Home"
@@ -69,11 +69,17 @@ const App = () => {
                     component={Results}
                 />
                 
+                <Stack.Screen
+                    name="Rules"
+                    component={Rules}
+                />
                 
+
             </Stack.Navigator>
+            
         </NavigationContainer>
     );
-    if (!hasLaunched) return <Rules />
+     
 }
 
 export default App;
