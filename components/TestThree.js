@@ -71,6 +71,28 @@ export default function TestOne({ navigation }) {
     }
 
 
+    // ---- wysy³anie odpowiedzi 
+
+    const sendResults = async (validateAnswer) => {
+        try {
+            const response = await fetch('http://tgryl.pl/quiz/result', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nick: 'JediKiller99',
+                    score: '1',
+                    total: '5',
+                    type: 'Food'
+                }),
+            });
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const renderQuestion = () => {
         return (
@@ -276,6 +298,18 @@ export default function TestOne({ navigation }) {
                                 <Text style={{
                                     textAlign: 'center', color: COLORS.white, fontSize: 20
                                 }}>Retry Quiz</Text>
+                            </TouchableOpacity>
+
+                            {/* send answears */}
+                            <TouchableOpacity
+                                onPress={() => sendResults(validateAnswer)}
+                                style={{
+                                    backgroundColor: COLORS.accent,
+                                    padding: 20, width: '100%', borderRadius: 20
+                                }}>
+                                <Text style={{
+                                    textAlign: 'center', color: COLORS.white, fontSize: 20
+                                }}>Send results</Text>
                             </TouchableOpacity>
 
                         </View>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, StyleSheet } from 'react-native'
+import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, StyleSheet, Button } from 'react-native'
 import { COLORS, SIZES } from '../constants';
 import data from '../mechanics/QuizDataFirst';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -70,7 +70,28 @@ export default function TestOne({ navigation }) {
         }).start();
     }
 
+    // ---- wysy³anie odpowiedzi 
 
+    const sendResults = async (validateAnswer) => {
+        try {
+            const response = await fetch('http://tgryl.pl/quiz/result', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    nick: 'JediKiller99',
+                    score: '2',
+                    total: '5',
+                    type: 'General knowledge'
+                }),
+            });
+            const json = await response.json();
+            console.log(json);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     const renderQuestion = () => {
         return (
@@ -275,6 +296,19 @@ export default function TestOne({ navigation }) {
                                 <Text style={{
                                     textAlign: 'center', color: COLORS.white, fontSize: 20
                                 }}>Retry Quiz</Text>
+                            </TouchableOpacity>
+
+
+                            {/* send answears */}
+                            <TouchableOpacity
+                                onPress={() => sendResults(validateAnswer)}
+                                style={{
+                                    backgroundColor: COLORS.accent,
+                                    padding: 20, width: '100%', borderRadius: 20
+                                }}>
+                                <Text style={{
+                                    textAlign: 'center', color: COLORS.white, fontSize: 20
+                                }}>Send results</Text>
                             </TouchableOpacity>
 
                         </View>

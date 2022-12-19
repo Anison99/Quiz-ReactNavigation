@@ -1,6 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 import React, { useState, useEffect } from 'react';
 import { Button } from 'react-native';
@@ -11,7 +11,6 @@ import TestOne from './components/TestOne';
 import TestTwo from './components/TestTwo';
 import TestThree from './components/TestThree';
 import Results from './components/Results';
-import HelloScreen from './mechanics/HelloScreen';
 import Rules from './components/Rules';
 
 const HAS_LAUNCHED = 'HAS_LAUNCHED';
@@ -20,6 +19,8 @@ const Stack = createStackNavigator(); // zainicjowanie górnnego paska nawigacji
  
 
 const App = () => {
+    const [isReady, setIsReady] = useState(false);
+
     const [hasLaunched, setHasLaunched] = useState(false);
 
     useEffect(() => {
@@ -83,3 +84,6 @@ const App = () => {
 }
 
 export default App;
+
+
+

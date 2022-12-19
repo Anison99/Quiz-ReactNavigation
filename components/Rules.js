@@ -5,7 +5,6 @@ import { COLORS, SIZES } from '../constants';
 
 
 export default function Rules({ navigation }) {
-    
 
     return (
         <View style={styles.container}>
@@ -38,7 +37,10 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 16,
         paddingTop: 40,
-        color: COLORS.primary
+        color: COLORS.primary,
+        fontFamily: 'Roboto'
+       
+        
     },
     rulesHeader: {
         fontSize: 30,
@@ -57,7 +59,9 @@ const styles = StyleSheet.create({
     buttonStyles: {
         backgroundColor: '#608CCF',
         
-    }
+    },
+    
+ 
 
 
 });
