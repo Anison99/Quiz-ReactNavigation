@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StatusBar, Image, TouchableOpacity, Modal, Animated, StyleSheet, Button, FlatList, ScrollView } from 'react-native';
-import { COLORS, SIZES } from '../constants';
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import TestRandom from './TestRandom';
 
 const testLinks = [
-     'https://tgryl.pl/quiz/test/62032610069ef9b2616c761e',
-     'https://tgryl.pl/quiz/test/62032610069ef9b2616c761c' ,
-     'https://tgryl.pl/quiz/test/62032610069ef9b2616c761d' ,
-     'https://tgryl.pl/quiz/test/62032610069ef9b2616c761b', 
+    'https://tgryl.pl/quiz/test/62032610069ef9b2616c761e',
+    'https://tgryl.pl/quiz/test/62032610069ef9b2616c761c',
+    'https://tgryl.pl/quiz/test/62032610069ef9b2616c761d',
+    'https://tgryl.pl/quiz/test/62032610069ef9b2616c761b',
 ];
 
-const RandomGenerator = ({navigation }) => {
+const RandomGenerator = ({ navigation }) => {
     const [selectedTestLink, setSelectedTestLink] = useState(null);
     const [selectedTest, setSelectedTest] = useState(null);
 
@@ -28,7 +28,9 @@ const RandomGenerator = ({navigation }) => {
             const name = test.name;
             const description = test.description;
             const level = test.level;
-            const selectedTest = { name, description,level }; // pobieranie danych z wygenerowanego linku 
+            const tasks = test.tasks;
+            const answer = test.answers;
+            const selectedTest = { test, name, description, level, tasks, answer };
             setSelectedTest(selectedTest);
         } catch (error) {
             console.error(error);
@@ -36,28 +38,51 @@ const RandomGenerator = ({navigation }) => {
     }
 
     return (
-        <ScrollView backgroundColor={COLORS.primary}>
-                {selectedTestLink ? (
-                <View backgroundColor={COLORS.primary}>
-                    <TouchableOpacity onPress={fetchTestDetails} style={{marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 5}}>
-                        <Text style={{ fontSize: 20, color: COLORS.white, textAlign: 'center' }}>Click to check details</Text>
-                        </TouchableOpacity>
-                        {selectedTest ? (
-                        // <Text>Szczegó³y testu: {JSON.stringify(selectedTest)}</Text>
-                        <Text style={{ fontSize: 20, color: COLORS.white }}>DETAILS: {"\n"}Topic: {selectedTest.name},{"\n"}Level: {selectedTest.level}, {"\n"}Description:{selectedTest.description}</Text>
-                        ) : null}
-                    </View>
-                ) : (
-                    <TouchableOpacity style={{ marginTop: 20, width: '100%', backgroundColor: COLORS.accent, padding: 20, borderRadius: 5 }} onPress={selectRandomTestLink} >
-                        <Text style={{ fontSize: 20, color: COLORS.white, textAlign: 'center' }}>GENERATE TEST</Text>
+        <ScrollView>
+            {selectedTestLink ? (
+                <View>
+                    <TouchableOpacity onPress={fetchTestDetails} style={styles.buttonStyle}>
+                        <Text style={styles.textStyle}>Click to check details</Text>
                     </TouchableOpacity>
+                    {selectedTest ? (
+                        <Text style={styles.detailsStyle}>
+                            DETAILS: {'\n'}Topic: {selectedTest.name},{'\n'}Level: {selectedTest.level}, {'\n'}Description:{selectedTest.description}
+                        </Text>
+                    ) : null}
+                </View>
+            ) : (
+                    <TouchableOpacity style={styles.buttonStyle} onPress={selectRandomTestLink}>
+                    <Text style={styles.textStyle}>GENERATE TEST</Text>
+                </TouchableOpacity>
             )}
+            {/* }
+            <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('Test Random')}>
+                <Text style={styles.textStyle}>Move to test</Text>
+            </TouchableOpacity>
+            */}
+
+            {selectedTest ? <TestRandom data={selectedTest} /> : null}
         </ScrollView>
     );
-
-
-      // -------------- METODY POMOCNICZE -------------------
-
 };
 
 export default RandomGenerator;
+
+const styles = StyleSheet.create({
+    buttonStyle: {
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        padding: 10,
+        margin: 10,
+    },
+    textStyle: {
+        color: '#000',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    detailsStyle: {
+        margin: 10,
+        fontSize: 16,
+    },
+});
+
