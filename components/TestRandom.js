@@ -41,8 +41,6 @@ const TestRandom = ({ data }) => {
     );
 };
 
-
-
 export default TestRandom;
 
 const styles = StyleSheet.create({

@@ -29,6 +29,7 @@
     "react-native-countdown-component": "^2.7.1",
     "react-native-data-table": "^0.2.2",
     "react-native-gesture-handler": "^2.8.0",
+    "react-native-netinfo": "^1.1.0",
     "react-native-onboarding-swiper": "^1.2.0",
     "react-native-paper": "^4.12.5",
     "react-native-reanimated": "~2.12.0",

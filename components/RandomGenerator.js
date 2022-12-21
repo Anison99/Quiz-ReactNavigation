@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import axios from 'axios';
+import NetInfo from 'react-native-netinfo';
 import TestRandom from './TestRandom';
 
 const testLinks = [
@@ -14,7 +15,7 @@ const testLinks = [
 const RandomGenerator = ({ navigation }) => {
     const [selectedTestLink, setSelectedTestLink] = useState(null);
     const [selectedTest, setSelectedTest] = useState(null);
-    const db = SQLite.openDatabase({ name: 'mydb.db' });
+
 
 
     function selectRandomTestLink() {
@@ -38,55 +39,68 @@ const RandomGenerator = ({ navigation }) => {
             console.error(error);
         }
     }
+    useEffect(() => {
+        async function fetchData() {
+            const state = await NetInfo.fetch('https://tgryl.pl/quiz/tests');
 
+            if (!state.isConnected) {
+                console.log("no internet connection")
+            } else {
+                console.log("download data")
+            }
+        }
 
+        fetchData();
+    }, []);
 
-    return (
-        <ScrollView>
-            {selectedTestLink ? (
-                <View>
-                    <TouchableOpacity onPress={fetchTestDetails} style={styles.buttonStyle}>
-                        <Text style={styles.textStyle}>Click to check details</Text>
-                    </TouchableOpacity>
-                    {selectedTest ? (
-                        <Text style={styles.detailsStyle}>
-                            DETAILS: {'\n'}Topic: {selectedTest.name},{'\n'}Level: {selectedTest.level}, {'\n'}Description:{selectedTest.description}
-                        </Text>
-                    ) : null}
-                </View>
-            ) : (
+    // Render the component...
+   
+        return (
+            <ScrollView>
+                {selectedTestLink ? (
+                    <View>
+                        <TouchableOpacity onPress={fetchTestDetails} style={styles.buttonStyle}>
+                            <Text style={styles.textStyle}>Click to check details</Text>
+                        </TouchableOpacity>
+                        {selectedTest ? (
+                            <Text style={styles.detailsStyle}>
+                                DETAILS: {'\n'}Topic: {selectedTest.name},{'\n'}Level: {selectedTest.level}, {'\n'}Description:{selectedTest.description}
+                            </Text>
+                        ) : null}
+                    </View>
+                ) : (
                     <TouchableOpacity style={styles.buttonStyle} onPress={selectRandomTestLink}>
-                    <Text style={styles.textStyle}>GENERATE TEST</Text>
-                </TouchableOpacity>
-            )}
-            {/* }
+                        <Text style={styles.textStyle}>GENERATE TEST</Text>
+                    </TouchableOpacity>
+                )}
+                {/* }
             <TouchableOpacity style={styles.buttonStyle} onPress={() => navigation.navigate('Test Random')}>
                 <Text style={styles.textStyle}>Move to test</Text>
             </TouchableOpacity>
             */}
 
-            {selectedTest ? <TestRandom data={selectedTest} /> : null}
-        </ScrollView>
-    );
-};
+                {selectedTest ? <TestRandom data={selectedTest} /> : null}
+            </ScrollView>
+        );
+    };
 
-export default RandomGenerator;
+    export default RandomGenerator;
 
-const styles = StyleSheet.create({
-    buttonStyle: {
-        backgroundColor: '#fff',
-        borderRadius: 5,
-        padding: 10,
-        margin: 10,
-    },
-    textStyle: {
-        color: '#000',
-        fontSize: 16,
-        textAlign: 'center',
-    },
-    detailsStyle: {
-        margin: 10,
-        fontSize: 16,
-    },
-});
+    const styles = StyleSheet.create({
+        buttonStyle: {
+            backgroundColor: '#fff',
+            borderRadius: 5,
+            padding: 10,
+            margin: 10,
+        },
+        textStyle: {
+            color: '#000',
+            fontSize: 16,
+            textAlign: 'center',
+        },
+        detailsStyle: {
+            margin: 10,
+            fontSize: 16,
+        },
+    });
 
