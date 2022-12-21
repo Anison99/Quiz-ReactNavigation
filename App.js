@@ -10,6 +10,8 @@ import Home from './components/Home';
 import TestOne from './components/TestOne';
 import TestTwo from './components/TestTwo';
 import TestThree from './components/TestThree';
+import RandomGenerator from './components/RandomGenerator';
+import TestRandom from './components/TestRandom';
 import Results from './components/Results';
 import Rules from './components/Rules';
 
@@ -64,7 +66,15 @@ const App = () => {
                 <Stack.Screen
                     name="Test #3"
                     component={TestThree}
-                />
+               />
+               <Stack.Screen
+                   name="Random Generator"
+                   component={RandomGenerator}
+               />
+               <Stack.Screen
+                   name="Test Random"
+                   component={TestRandom}
+               />
                 <Stack.Screen
                     name="Results"
                     component={Results}

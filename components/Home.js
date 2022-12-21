@@ -46,6 +46,11 @@ export default function Home({ navigation }) {
                         <Text style={{ fontSize: 20, color: COLORS.white }}>Test #3 - food</Text>
                     </TouchableOpacity>
                 </View>
+                <View style={styles.spaceButtons}>
+                    <TouchableOpacity style={styles.container} color='#608CCF' onPress={() => navigation.navigate("Random Generator")}>
+                        <Text style={{ fontSize: 20, color: COLORS.white }}>Take a RANDOM test</Text>
+                    </TouchableOpacity>
+                </View>
 
                 <View style={styles.spaceButtons}>
                     <TouchableOpacity style={styles.container} color='#608CCF' onPress={() => navigation.navigate("Results")}>
