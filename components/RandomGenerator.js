@@ -14,6 +14,8 @@ const testLinks = [
 const RandomGenerator = ({ navigation }) => {
     const [selectedTestLink, setSelectedTestLink] = useState(null);
     const [selectedTest, setSelectedTest] = useState(null);
+    const db = SQLite.openDatabase({ name: 'mydb.db' });
+
 
     function selectRandomTestLink() {
         const randomIndex = Math.floor(Math.random() * testLinks.length);
@@ -36,6 +38,8 @@ const RandomGenerator = ({ navigation }) => {
             console.error(error);
         }
     }
+
+
 
     return (
         <ScrollView>
